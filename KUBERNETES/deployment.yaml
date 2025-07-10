@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-python-app
-        image: deepak1603/github-action-python:16202219541deepak1603/github-action-python:16202205892deepak1603/github-action-python:16202193390deepak1603/github-action-python:16202176709deepak1603/github-action-python:16202159979deepak1603/github-action-python:16202146088deepak1603/github-action-python:16202134696deepak1603/github-action-python:v1
+        image: deepak1603/github-action-python:16202235093deepak1603/github-action-python:16202219541deepak1603/github-action-python:16202205892deepak1603/github-action-python:16202193390deepak1603/github-action-python:16202176709deepak1603/github-action-python:16202159979deepak1603/github-action-python:16202146088deepak1603/github-action-python:16202134696deepak1603/github-action-python:v1
         ports:
         - containerPort: 5000
         resources:
