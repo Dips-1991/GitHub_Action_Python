@@ -65,8 +65,9 @@ jobs:
             token: ${{ secrets.GITHUBTOKEN }}
         - name: Update tag in k8s deployment
           run: |
-            sed -i "s|image:. *|image: ${{ secrets.DOCKER_USERNAME }}/github-action-python:${{ github.run_id }}|" KUBERNETES/deployment.yaml
+            sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/github-action-python:${{ github.run_id }}|" KUBERNETES/deployment.yaml
             
+
         - name: Git push and commit
           run: |
             git config --global user.email "patildipak0791@gmail.com"
