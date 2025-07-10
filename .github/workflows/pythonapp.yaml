@@ -49,7 +49,7 @@ jobs:
                 context: Python
                 file: Python/Dockerfile
                 push: true
-                tags: ${{ secrets.DOCKER_USERNAME }}/github-action-python:v3
+                tags: ${{ secrets.DOCKER_USERNAME }}/github-action-python:${{github.run_id}}
               
     updatek8s:
         runs-on: ubuntu-latest
