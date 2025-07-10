@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-python-app
-        image: deepak1603/github-action-python:16203130444
+        image: deepak1603/github-action-python:16203145518
         ports:
         - containerPort: 5000
         resources:
