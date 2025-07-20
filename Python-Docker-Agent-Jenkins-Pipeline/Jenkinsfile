@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'pip install --no-cache-dir -r requirements.txt'
+                sh 'pip install --no-cache-dir -r /Python-Docker-Agent-Jenkins-Pipeline/requirements.txt'
             }
         }
         stage('Run Tests') {
