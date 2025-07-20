@@ -31,17 +31,22 @@ pipeline {
         // }
         stage('Docker Build') {
             agent any
-            steps {
-                withDockerRegistry(credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/') {
-                    sh 'docker build -t ${env.DOCKER_REGISTRY}/${env.PYTHON_APP}:${env.IMAGE_TAG} .'
+              steps {
+                script {
+                    // Navigate to the directory containing your Dockerfile
+                    dir('Python-Docker-Agent-Jenkins-Pipeline') {
+                        sh "docker build -t ${env.DOCKER_REGISTRY}/${env.PYTHON_APP_NAME}:${env.BUILD_NUMBER} ."
+                    }
                 }
             }
             }
         stage('Docker Push') {
             agent any
             steps {
-                withDockerRegistry(credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/') {
-                    sh 'docker push ${env.DOCKER_REGISTRY}/${env.PYTHON_APP}:${env.IMAGE_TAG}'
+                script {
+                    withDockerRegistry(credentialsId: "${env.DOCKER_HUB_CREDENTIALS}", url: "https://index.docker.io/v1/") {
+                        sh "docker push ${env.DOCKER_REGISTRY}/${env.PYTHON_APP_NAME}:${env.BUILD_NUMBER}"
+                    }
                 }
             }
         }
