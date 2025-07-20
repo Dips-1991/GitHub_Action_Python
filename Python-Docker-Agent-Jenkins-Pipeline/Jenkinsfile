@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                checkout scm
+                git branch: 'master', url: 'https://github.com/Dips-1991/GitHub_Action_Python.git'
             }
         }
         stage('Install Dependencies') {
