@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'python:3.9-slim-buster' // Use a lightweight Python image
-            args '-u root:root' // Run as root inside the container for permissions if needed (use with caution)
+            args '-u 0:0' // Run as root inside the container for permissions if needed (use with caution)
         }
     }
 
