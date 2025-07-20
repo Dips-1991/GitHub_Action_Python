@@ -16,6 +16,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
+                sh 'apt-get update && apt-get install -y git'
                 git branch: 'master', url: 'https://github.com/Dips-1991/GitHub_Action_Python.git'
             }
         }
