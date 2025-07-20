@@ -1,0 +1,49 @@
+pipeline {
+    agent {
+        docker {
+            image 'python:3.9-slim-buster' // Use a lightweight Python image
+            args '-u root:root' // Run as root inside the container for permissions if needed (use with caution)
+        }
+    }
+
+    environment {
+        PYTHON_APP = 'Python-Docker-Agent-Jenkins-Pipeline'
+        DOCKER_REGISTRY = 'docker.io/deepak1603'
+        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')
+        IMAGE_TAG = "v${BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install --no-cache-dir -r requirements.txt'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh 'pytest'
+            }
+        }
+        stage('Docker Build') {
+            agent any
+            steps {
+                withDockerRegistry(credentialsId: 'docker-hub-credentials') {
+                    sh 'docker build -t ${env.DOCKER_REGISTRY}/${env.PYTHON_APP}:${env.IMAGE_TAG} .'
+                }
+            }
+            }
+        stage('Docker Push') {
+            agent any
+            steps {
+                withDockerRegistry(credentialsId: 'docker-hub-credentials') {
+                    sh 'docker push ${env.DOCKER_REGISTRY}/${env.PYTHON_APP}:${env.IMAGE_TAG}'
+                }
+            }
+        }
+    }
+}
