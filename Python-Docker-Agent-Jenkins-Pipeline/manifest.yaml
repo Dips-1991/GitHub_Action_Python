@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: python-docker-agent
-        image: python3.9-slim-buster
+        image: deepak1603/python-docker-agent-jenkins-pipeline:v28
         ports:
         - containerPort: 5000
         resources:
