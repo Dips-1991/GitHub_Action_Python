@@ -1,0 +1,16 @@
+# Use a base image that includes Python
+FROM python:3.9-slim   
+
+#or python:3.9-slim-bookworm
+
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y docker.io
+
+
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+
+WORKDIR /app
+
+CMD ["bash"]
