@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: python-docker-agent
+  labels:
+    app: python-docker-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-docker-agent
+  template:
+    metadata:
+      labels:
+        app: python-docker-agent
+    spec:
+      containers:
+      - name: python-docker-agent
+        image: python3.9-slim-buster
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-docker-agent-service
+spec:
+  selector:
+    app: python-docker-agent
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
